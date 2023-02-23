@@ -1,6 +1,6 @@
 {
-  "My Zero-Spend Budget": {
-      "Amount": "1",
+  "BudgetLimit": {
+      "Amount": "100",
       "Unit": "USD"
   },
   "BudgetName": "Example Tag Budget",
