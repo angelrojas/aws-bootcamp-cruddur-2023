@@ -27,18 +27,26 @@ from aws_xray_sdk.core import xray_recorder
 from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
 
 xray_url = os.getenv("AWS_XRAY_URL")
-xray_recorder.configure(service='Cruddur', dynamic_naming=xray_url)
-XRayMiddleware(app, xray_recorder)
+xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
+
 
 # HoneyComb --------
 # Initialize tracing and an exporter that can send data to Honeycomb
 provider = TracerProvider()
 processor = BatchSpanProcessor(OTLPSpanExporter())
 provider.add_span_processor(processor)
+
+simple_processor = SimpleSpanProcessor(ConsoleSpanExporter())
+provider.add_span_processor(simple_processor)
+
 trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
 
 app = Flask(__name__)
+
+#XRAY aws ----
+XRayMiddleware(app, xray_recorder)
+
 # HoneyComb --------
 # Initialize automatic instrumentation with Flask
 FlaskInstrumentor().instrument_app(app)
