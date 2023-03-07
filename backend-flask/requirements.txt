@@ -12,3 +12,4 @@ blinker
 rollbar
 
 watchtower
+Flask-AWSCognito
