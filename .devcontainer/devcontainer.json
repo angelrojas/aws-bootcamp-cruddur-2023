@@ -19,7 +19,11 @@
 				"terminal.integrated.fontSize": 20,
 				"editor.fontSize": 20,
 				"workbench.colorTheme": "Default Dark+ Experimental"
-			}
+			},
+			"postCreateCommand": {
+				 "make install && make tasks"
+			
+				}	 
 		}
 		
 
