@@ -38,6 +38,7 @@ services:
       REACT_APP_CLIENT_ID: "1pnidib4otetv95s0lnr42eo64"
 
     build: ./frontend-react-js
+    dockerfile: Dockerfile.prod
     ports:
       - "3000:3000"
     volumes:
@@ -77,10 +78,14 @@ services:
       - 2000:2000/udp
 # the name flag is a hack to change the default prepend folder
 # name when outputting the image names
+# networks: 
+#   cruddur-net:
+#     driver: bridge
+#     name: cruddur-net
 networks: 
-  cruddur-net:
+  internal-network:
     driver: bridge
-    name: cruddur-net
+    name: cruddur
 volumes:
   db:
     driver: local
