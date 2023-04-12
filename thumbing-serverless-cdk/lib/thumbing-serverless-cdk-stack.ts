@@ -40,6 +40,12 @@ export class ThumbingServerlessCdkStack extends cdk.Stack {
     });  
     return bucket;
   }
+
+  importBucket(bucketName: string): s3.IBucket {
+    const bucket = s3.Bucket.fromBucketName(this,"AssetsBucket",bucketName);
+    return bucket;
+  }
+
   createLambda(functionPath: string, bucketName: string, folderInput: string, folderOutput: string): lambda.IFunction {
     const lambdaFunction = new lambda.Function(this, 'ThumbLambda', {
       
@@ -58,12 +64,13 @@ export class ThumbingServerlessCdkStack extends cdk.Stack {
   }
 
   createS3NotifyToLambda(prefix: string, lambda: lambda.IFunction, bucket: s3.IBucket): void {
-  const destination = new s3n.LambdaDestination(lambda);
-    bucket.addEventNotification(s3.EventType.OBJECT_CREATED_PUT,
-    destination,
-    {prefix: prefix}
-  )
-}
+    const destination = new s3n.LambdaDestination(lambda);
+    bucket.addEventNotification(
+      s3.EventType.OBJECT_CREATED_PUT,
+      destination//,
+      //{prefix: prefix} // folder to contain the original images
+    )
+  }
 
 
   
