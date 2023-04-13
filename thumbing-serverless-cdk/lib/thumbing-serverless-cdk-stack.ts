@@ -136,7 +136,7 @@ export class ThumbingServerlessCdkStack extends cdk.Stack {
     );
   }
 
-  
+  /*
   createPolicySnSPublish(topicArn: string){
     const snsPublishPolicy = new iam.PolicyStatement({
       actions: [
@@ -148,5 +148,5 @@ export class ThumbingServerlessCdkStack extends cdk.Stack {
     });
     return snsPublishPolicy;
   }
-  
+  */
 }
